@@ -25,9 +25,7 @@ _comfy_keymap[89] = "trumpet";
 _comfy_keymap[84] = "music";
 _comfy_keymap[85] = "drum";
 
-
-jQuery.fn.comfy = function(handler_or_key, handler) {
-    this.keyup(function(evt) {
+function _handle_keyup(evt, handler_or_key, handler) {
 	var comfy_key_name = _comfy_keymap[evt.which];
 	if (typeof comfy_key_name != 'undefined') {
 	    evt.comfy_key = comfy_key_name
@@ -38,6 +36,9 @@ jQuery.fn.comfy = function(handler_or_key, handler) {
 	    }
 	}
 	return this;
-    });
+}
+
+jQuery.fn.comfy = function(handler_or_key, handler) {
+    jQuery(this).keyup(function(evt) { _handle_keyup(evt, handler_or_key, handler); });
 };
 
